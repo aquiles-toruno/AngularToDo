@@ -2,7 +2,7 @@ app.controller('registroctrl', ["$scope", "storagefact", "$log", function (scope
     scope.titulo = 'Crear tarea';
 
     scope.guardarTarea = function () {
-        // var tarea=
+        
         if (fact.verificarBd()) {
             var arrTareasGuardadas = {};
             arrTareasGuardadas = JSON.parse(localStorage.getItem('BD'));
