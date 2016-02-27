@@ -1,4 +1,4 @@
-var app = angular.module('ToDo', ['ngRoute','ui.bootstrap']);
+var app = angular.module('ToDo', ['ngRoute','ui.bootstrap','daterangepicker']);
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -9,6 +9,10 @@ app.config(function ($routeProvider) {
             contollerAs: 'ctrl1'
         })
         .when('/NewToDo', {
+            templateUrl: 'views/registro.html',
+            controller: 'registroctrl'
+        })
+        .when('/NewToDo/:accion', {
             templateUrl: 'views/registro.html',
             controller: 'registroctrl'
         })

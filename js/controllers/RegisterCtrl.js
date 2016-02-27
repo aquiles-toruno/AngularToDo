@@ -1,8 +1,8 @@
-app.controller('registroctrl', ["$scope", "storagefact", "$log", function (scope, fact, log) {
-    scope.titulo = 'Crear tarea';
+app.controller('registroctrl', ["$scope", "storagefact", "$log", "$window", "$routeParams", function (scope, fact, log, win, params) {
+    scope.titulo = params.accion == undefined ? 'Crear tarea' : 'Editar tarea';
 
     scope.guardarTarea = function () {
-        
+
         if (fact.verificarBd()) {
             var arrTareasGuardadas = {};
             arrTareasGuardadas = JSON.parse(localStorage.getItem('BD'));
@@ -13,35 +13,48 @@ app.controller('registroctrl', ["$scope", "storagefact", "$log", function (scope
             log.debug(idMax.id);
         }
         else {
-            var arrTareas = [];
-            var objTarea = { id: 1, tarea: scope.tarea, fecha: scope.fecha, hora: scope.hora, comentarios: scope.comentarios };
-            arrTareas.push(objTarea);
-            fact.crearBd(JSON.stringify(arrTareas));
+            try {
+                var arrTareas = [];
+                var fechaActual = new Date();
+                var objTarea = { id: 1, tarea: scope.tarea, fecha: scope.fecha, hora: scope.hora, comentarios: scope.comentarios, fechaCreacion: fechaActual };
+                arrTareas.push(objTarea);
+                fact.crearBd(JSON.stringify(arrTareas));
+
+                alertas("Hecho!", "Tarea guardada correctamente", "success");
+            }
+            catch (exc) {
+                alertas("Oops...", "Ha ocurrido un error", "error");
+            }
         }
     }
 
-    //Variables para la fecha
-    scope.today = function () {
-        scope.fecha = new Date();
-    };
+    //Función para mostrar alertas de sweetalert
+    function alertas(titulo, mensaje, tipo) {
+        swal(titulo, mensaje, tipo);
+    }
 
-    scope.today();
+    scope.cancelar = function () {
 
-    scope.clear = function () {
-        scope.fecha = null;
-    };
+        swal({
+            title: "Esta abandonando esta pagina",
+            text: "¿Desea continuar?",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
+        },
+            function () {
+                setTimeout(function () {
+                    win.location.href = "#/";
+                    swal.close();
+                }, 1000);
+            });
 
-    scope.openDate = function () {
-        scope.popupDate.opened = true;
-    };
+        // alertas("", "Has cancelado la operacion", "warning");
+    }
 
-    scope.setDate = function (year, month, day) {
-        scope.fecha = new Date(year, month, day);
-    };
-
-    scope.popupDate = {
-        opened: false
-    };
+    //Variables para la fecha    
+    scope.fecha = { startDate: null, endDate: null };
     
     //Variables para la hora
     scope.hora = new Date();

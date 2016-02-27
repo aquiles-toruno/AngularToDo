@@ -11,8 +11,9 @@
             <div class="row">
                 <div class="col-lg-6">
                     <label for="fecha">Fecha:</label>
-                    <input name="fecha" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fecha" is-open="popupDate.opened"
-                    close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-click="openDate()" required />
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="fecha" placeholder="Fecha" required />
+                    <!--<input name="fecha" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fecha" is-open="popupDate.opened"
+                    close-text="Cerrar" current-text="Hoy" clear-text="Limpiar" ng-click="openDate()" required />-->
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -30,7 +31,7 @@
                 <button type="submit" class="btn btn-success" title="Guardar">
                     <i class="glyphicon glyphicon-floppy-disk"></i>
                 </button>
-                <button type="button" class="btn btn-warning" title="Cancelar">
+                <button type="button" class="btn btn-warning" title="Cancelar" ng-click="cancelar()">
                     <i class="glyphicon glyphicon-floppy-remove"></i>
                 </button>
             </div>
