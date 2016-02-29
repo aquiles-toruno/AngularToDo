@@ -15,5 +15,25 @@ app.factory('storagefact', function () {
         }
     };
 
+    factory.getArr = function () {
+        return JSON.parse(localStorage.getItem('BD'));
+    }
+
+    factory.getItemById = function (idTarea) {
+        var bd = localStorage.getItem('BD');
+
+        var obj = JSON.parse(bd);
+
+        var objFiltrado = _.find(obj, function (item) {
+            return item.id == idTarea;
+        });
+
+        return objFiltrado;
+    }
+
+    factory.updateTarea = function (obj) {
+
+    }
+
     return factory;
 });

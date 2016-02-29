@@ -1,0 +1,20 @@
+#tareas-pendientes{
+    padding: 10px;
+}
+
+#tareas-proceso{
+    padding: 10px;
+}
+
+#tareas-realizadas{
+    padding: 10px;
+}
+
+.tareas-contenedores{
+    height: 500px;
+    background-color: #f4f4f4;
+}
+
+.item{
+    cursor: move;
+}
