@@ -32,7 +32,17 @@ app.factory('storagefact', function () {
     }
 
     factory.updateTarea = function (obj) {
+        var bd = localStorage.getItem('BD');
 
+        var objGuardado = JSON.parse(bd);
+
+        var objFiltrado = _.find(objGuardado, function (item) {
+            return item.id == obj.id;
+        });
+
+        objFiltrado.estado = obj.estado;
+        
+        localStorage.setItem('BD', JSON.stringify(objGuardado));
     }
 
     return factory;
