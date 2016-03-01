@@ -10,42 +10,14 @@
         </div>
     </div>
 
-    <div id="contenedor-primario">
+    <div>
         <div class="row">
 
-            <div id="tareas-pendientes" class="col-lg-4">
-                <h4>Por hacer</h4>
-                <div class="tareas-contenedores" ng-drop="true" ng-drop-success="onDropComplete($data,$event,'div1')">
-                    <div ng-repeat="item in datos| filter:{estado:'pendiente'} track by item.id" ng-drag="true" ng-drag-data="item" ng-drag-success="onDragComplete($data,$event)"
-                    ng-center-anchor="true" class="thumbnail item">
-                        <div>
-                            <h4>
-                            <a ng-href="#/NewToDo/{{item.id}}">{{item.tarea}}</a>
-                        </h4>
-                        </div>
-                        <div>
-                            <span>
-                            {{item.comentarios}}
-                        </span>
-                        </div>
-                        <div>
-                            <small class="label label-primary" title="Fecha de creación">
-                            {{item.fechaCreacion | date:'dd/MMM/yyyy'}}
-                        </small>
-                            <div class="pull-right">
-                                <small class="label label-info" title="Fecha de ejecución">
-                            {{item.fecha.startDate | date:'dd/MMM/yyyy'}} - {{item.fecha.endDate | date:'dd/MMM/yyyy'}}
-                        </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="tareas-pendientes" class="col-lg-4">
-                <h4>Haciendo</h4>
-                <div class="tareas-contenedores" ng-drop="true" ng-drop-success="onDropComplete($data,$event,'div2')">
-                    <div ng-repeat="item in datos| filter:{estado:'proceso'} track by item.id" ng-drag="true" ng-drag-data="item" ng-drag-success="onDragComplete($data,$event)"
-                    ng-center-anchor="true" class="thumbnail item">
+            <div>
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div1')" class="col-lg-4 tareas-contenedores">
+                    <h4>Por hacer</h4>
+                    <li ng-repeat="item in datos | filter:{estado:'pendiente'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
+                    class="thumbnail item">
 
                         <div>
                             <h4>
@@ -63,19 +35,21 @@
                         </small>
                             <div class="pull-right">
                                 <small class="label label-info" title="Fecha de ejecución">
-                            {{item.fecha.startDate | date:'dd/MMM/yyyy'}} - {{item.fecha.endDate | date:'dd/MMM/yyyy'}}
+                            {{item.fecha | date:'dd/MMM/yyyy'}}
                         </small>
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
-            <div id="tareas-pendientes" class="col-lg-4">
-                <h4>Realizadas</h4>
-                <div class="tareas-contenedores" ng-drop="true" ng-drop-success="onDropComplete($data,$event,'div3')">
-                    <div ng-repeat="item in datos| filter:{estado:'realizado'} track by item.id" ng-drag="true" ng-drag-data="item" ng-drag-success="onDragComplete($data,$event)"
-                    ng-center-anchor="true" class="thumbnail item">
+
+            <div>
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div2')" class="col-lg-4 tareas-contenedores">
+                    <h4>En proceso</h4>
+                    <li ng-repeat="item in datos | filter:{estado:'proceso'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
+                    class="thumbnail item">
+
                         <div>
                             <h4>
                             <a ng-href="#/NewToDo/{{item.id}}">{{item.tarea}}</a>
@@ -92,14 +66,45 @@
                         </small>
                             <div class="pull-right">
                                 <small class="label label-info" title="Fecha de ejecución">
-                            {{item.fecha.startDate | date:'dd/MMM/yyyy'}} - {{item.fecha.endDate | date:'dd/MMM/yyyy'}}
+                            {{item.fecha | date:'dd/MMM/yyyy'}}
                         </small>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                    </li>
+                </ul>
             </div>
 
+            <div>
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div3')" class="col-lg-4 tareas-contenedores">
+                    <h4>Realizadas</h4>
+                    <li ng-repeat="item in datos | filter:{estado:'realizado'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
+                    class="thumbnail item">
+
+                        <div>
+                            <h4>
+                            <a ng-href="#/NewToDo/{{item.id}}">{{item.tarea}}</a>
+                        </h4>
+                        </div>
+                        <div>
+                            <span>
+                            {{item.comentarios}}
+                        </span>
+                        </div>
+                        <div>
+                            <small class="label label-primary" title="Fecha de creación">
+                            {{item.fechaCreacion | date:'dd/MMM/yyyy'}}
+                        </small>
+                            <div class="pull-right">
+                                <small class="label label-info" title="Fecha de ejecución">
+                            {{item.fecha | date:'dd/MMM/yyyy'}}
+                        </small>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

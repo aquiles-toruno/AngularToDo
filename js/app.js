@@ -1,4 +1,4 @@
-var app = angular.module('ToDo', ['ngRoute', 'ui.bootstrap', 'daterangepicker', 'ngDraggable']);
+var app = angular.module('ToDo', ['ngRoute', 'ui.bootstrap', 'dndLists']);
 
 app.config(function ($routeProvider) {
     $routeProvider

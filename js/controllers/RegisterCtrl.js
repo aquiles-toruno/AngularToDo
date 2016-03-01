@@ -5,6 +5,37 @@ app.controller('registroctrl', ["$scope", "storagefact", "datashare", "$log", "$
     //Variables para la hora
     scope.hstep = 1;
     scope.mstep = 5;
+    
+    //Variables para la fecha    
+    scope.today = function () {
+
+        scope.fecha = new Date();
+
+    };
+
+    scope.clear = function () {
+
+        scope.fecha = null;
+
+    };
+
+    scope.openDate = function () {
+
+        scope.popupDate.opened = true;
+
+    };
+
+    scope.setDate = function (year, month, day) {
+
+        scope.fecha = new Date(year, month, day);
+
+    };  
+
+    scope.popupDate = {
+
+        opened: false
+
+    };
 
     scope.ismeridian = true;
     scope.toggleMode = function () {
@@ -16,8 +47,8 @@ app.controller('registroctrl', ["$scope", "storagefact", "datashare", "$log", "$
         scope.tarea = '';
         scope.comentarios = '';
         
-        //Variables para la fecha    
-        scope.fecha = { startDate: null, endDate: null };
+        //Variables para la fecha
+        scope.today();
         
         //Variables para la hora
         scope.hora = new Date();
@@ -36,8 +67,7 @@ app.controller('registroctrl', ["$scope", "storagefact", "datashare", "$log", "$
                 if (tareaById.length > 0) {
                     scope.tarea = tareaById[0].tarea;
                     scope.comentarios = tareaById[0].comentarios;
-                    scope.fecha.startDate = moment(tareaById[0].fecha.startDate);
-                    scope.fecha.endDate = moment(tareaById[0].fecha.endDate);
+                    scope.fecha = new Date(tareaById[0].fecha);
                     scope.hora = new Date(tareaById[0].hora);
                 }
                 else {
@@ -70,7 +100,7 @@ app.controller('registroctrl', ["$scope", "storagefact", "datashare", "$log", "$
                     match.tarea = scope.tarea;
                     match.fecha = scope.fecha;
                     match.hora = scope.hora;
-                    match.estado = 'pendiente';
+                    match.estado = match.estado;
 
                     fact.crearBd(JSON.stringify(arrTareasGuardadas));
                     // dataserv.arr = arrTareasGuardadas;
