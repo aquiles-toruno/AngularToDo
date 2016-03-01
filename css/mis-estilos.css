@@ -18,3 +18,11 @@
 .item{
     cursor: move;
 }
+
+ul{
+    list-style-type: none;
+}
+
+.realizadas{
+    text-decoration: line-through;
+}

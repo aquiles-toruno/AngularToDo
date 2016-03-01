@@ -40,6 +40,9 @@ app.controller('todoctrl', ['$scope', 'datashare', 'storagefact', '$log', functi
             case 'div3':
                 objRecibido.estado = 'realizado'
                 break;
+            case 'div4':
+                objRecibido.estado = 'archivado'
+                break;
         }
 
         fact.updateTarea(objRecibido);

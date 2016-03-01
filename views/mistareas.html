@@ -11,13 +11,18 @@
     </div>
 
     <div>
+        <div class="input-group">
+            <input type="text" ng-model="buscar" class="form-control" placeholder="Filtrar tarea">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
         <div class="row">
-
             <div>
-                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div1')" class="col-lg-4 tareas-contenedores">
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div1')" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 tareas-contenedores">
                     <h4>Por hacer</h4>
-                    <li ng-repeat="item in datos | filter:{estado:'pendiente'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
-                    class="thumbnail item">
+                    <li ng-repeat="item in datos | filter:{estado:'pendiente'} | filter:{tarea:buscar} track by item.id" dnd-draggable="item"
+                    dnd-effect-allowed="copyMove" class="thumbnail item">
 
                         <div>
                             <h4>
@@ -45,9 +50,9 @@
             </div>
 
             <div>
-                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div2')" class="col-lg-4 tareas-contenedores">
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div2')" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 tareas-contenedores">
                     <h4>En proceso</h4>
-                    <li ng-repeat="item in datos | filter:{estado:'proceso'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
+                    <li ng-repeat="item in datos | filter:{estado:'proceso'} | filter:{tarea:buscar} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
                     class="thumbnail item">
 
                         <div>
@@ -76,9 +81,40 @@
             </div>
 
             <div>
-                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div3')" class="col-lg-4 tareas-contenedores">
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div3')" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 tareas-contenedores">
                     <h4>Realizadas</h4>
-                    <li ng-repeat="item in datos | filter:{estado:'realizado'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
+                    <li ng-repeat="item in datos | filter:{estado:'realizado'} | filter:{tarea:buscar} track by item.id" dnd-draggable="item"
+                    dnd-effect-allowed="copyMove" class="thumbnail item">
+
+                        <div>
+                            <h4>
+                            <a ng-href="#/NewToDo/{{item.id}}" class="realizadas">{{item.tarea}}</a>
+                        </h4>
+                        </div>
+                        <div>
+                            <span>
+                            {{item.comentarios}}
+                        </span>
+                        </div>
+                        <div>
+                            <small class="label label-primary" title="Fecha de creación">
+                            {{item.fechaCreacion | date:'dd/MMM/yyyy'}}
+                        </small>
+                            <div class="pull-right">
+                                <small class="label label-info" title="Fecha de ejecución">
+                            {{item.fecha | date:'dd/MMM/yyyy'}}
+                        </small>
+                            </div>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <ul dnd-list="datos" dnd-drop="dropCallback(event, item, 'div4')" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 tareas-contenedores">
+                    <h4>Archivadas</h4>
+                    <li ng-repeat="item in datos | filter:{estado:'archivado'} track by item.id" dnd-draggable="item" dnd-effect-allowed="copyMove"
                     class="thumbnail item">
 
                         <div>
