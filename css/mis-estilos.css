@@ -13,6 +13,9 @@
 .tareas-contenedores{
     height: 500px;
     background-color: #f4f4f4;
+        border-radius: 6px;
+    border-color: darkcyan;
+    border-style: double;
 }
 
 .item{
